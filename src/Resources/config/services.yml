@@ -15,3 +15,10 @@ services:
   Evrinoma\CollectorBundle\Controller\CollectorApiController:
     alias: evrinoma.collector.api.controller
     public: true
+
+  evrinoma.collector.collection:
+    class: Evrinoma\CollectorBundle\Chain\Collection
+
+  Evrinoma\CollectorBundle\Chain\Collection:
+    alias: evrinoma.collector.collection
+    public: true

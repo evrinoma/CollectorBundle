@@ -51,7 +51,7 @@ final class CollectorApiController extends AbstractApiController
      */
     public function getEntityTypesAction()
     {
-        return $this->json($this->collectorManager->setRestSuccessOk(), $this->collectorManager->getRestStatus());
+        return $this->setSerializeGroup($this->collectorManager->getSerializeGroup())->json($this->collectorManager->setRestSuccessOk()->run(), $this->collectorManager->getRestStatus());
     }
 //endregion Public
 }
