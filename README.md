@@ -1,3 +1,13 @@
+#Конфигурация  
+    collector:
+      settings:
+        serialize_group: collector  - группа сериализации
+        collector: 'Evrinoma\CollectorBundle\Chain\Collection' - агрегирующий объект
+        list: - сущности
+          - 'App\Collector\User'
+          - 'user.project'
+          - 'App\Collector\ContrAgent'
+
 #Как подключать сущности
 В конфигурации, с помощью параметра list укзаываем классы сущностей имплементирующие интерфейс AbstractCollectorHandler
 
