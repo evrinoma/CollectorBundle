@@ -55,11 +55,11 @@ final class CollectorManager implements CollectorManagerInterface
         $this->collection = $collection;
     }
 
-    public function run()
+    public function run():CollectionInterface
     {
         $this->chain->setCollection($this->collection)->handle();
 
-        return $this;
+        return $this->collection;
     }
 //endregion Public
 
