@@ -1,0 +1,17 @@
+services:
+  evrinoma.collector.manager:
+    class: Evrinoma\CollectorBundle\Manager\CollectorManager
+
+  Evrinoma\CollectorBundle\Manager\CollectorManager:
+    alias: evrinoma.collector.manager
+
+  evrinoma.collector.api.controller:
+    class: Evrinoma\CollectorBundle\Controller\CollectorApiController
+    arguments:
+      - '@jms_serializer'
+      - '@evrinoma.collector.manager'
+    autowire: true
+
+  Evrinoma\CollectorBundle\Controller\CollectorApiController:
+    alias: evrinoma.collector.api.controller
+    public: true

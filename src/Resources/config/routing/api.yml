@@ -1,0 +1,3 @@
+collector_api:
+  resource: "@EvrinomaCollectorBundle/Controller/CollectorApiController.php"
+  type: annotation
