@@ -21,4 +21,14 @@ class Collection implements CollectionInterface
     {
         $this->collection[$key] = $value;
     }
+
+    /**
+     * @param string $key
+     *
+     * @return bool
+     */
+    public function has(string $key): bool
+    {
+        return array_key_exists($key,$this->collection);
+    }
 }

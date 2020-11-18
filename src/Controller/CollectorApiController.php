@@ -3,6 +3,7 @@
 namespace Evrinoma\CollectorBundle\Controller;
 
 
+use App\Collector\ContrAgent;
 use Evrinoma\CollectorBundle\Manager\CollectorManagerInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractApiController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -43,15 +44,27 @@ final class CollectorApiController extends AbstractApiController
 
 //region SECTION: Public
     /**
-     * @Rest\Get("/api/collector/get", name="api_collector_entity")
+     * @Rest\Get("/api/collector/run", name="api_collector_entity", options={"expose"=true})
      * @SWG\Get(tags={"collector"})
      * @SWG\Response(response=200,description="Get collected entity")
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function getEntityTypesAction()
+    public function collectEntityTypesAction()
     {
         return $this->setSerializeGroup($this->collectorManager->getSerializeGroup())->json($this->collectorManager->setRestSuccessOk()->run(), $this->collectorManager->getRestStatus());
+    }
+
+    /**
+     * @Rest\Get("/api/collector/get", name="api_collector_get_entity", options={"expose"=true})
+     * @SWG\Get(tags={"collector"})
+     * @SWG\Response(response=200,description="Get collected entity by key")
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function getEntityTypesAction()
+    {
+        return $this->setSerializeGroup($this->collectorManager->getSerializeGroup())->json($this->collectorManager->setRestSuccessOk()->get(ContrAgent::class), $this->collectorManager->getRestStatus());
     }
 //endregion Public
 }

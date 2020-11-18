@@ -21,15 +21,22 @@ abstract class AbstractCollectorHandler implements CollectorHandlerInterface
 //endregion Fields
 
 //region SECTION: Public
-    public function handle()
+    public function handle():void
     {
-        $this->collection->add($this->getClass(),$this->collect());
+       $this->iterate();
 
         if ($this->nextHandler) {
             $this->nextHandler->setCollection($this->collection)->handle();
         }
     }
-//endregion Public
+
+    public function iterate():void
+    {
+        if (!$this->collection->has($this->getClass())) {
+            $this->collection->add($this->getClass(),$this->collect());
+        }
+    }
+    //endregion Public
 
 //region SECTION: Getters/Setters
     public function getClass(): string

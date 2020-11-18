@@ -9,7 +9,7 @@
           - 'App\Collector\ContrAgent'
 
 #Как подключать сущности
-В конфигурации, с помощью параметра list укзаываем классы сущностей имплементирующие интерфейс AbstractCollectorHandler
+В конфигурации, с помощью параметра list укзаываем классы сущностей наследующиеся от абстракции AbstractCollectorHandler имплементирующие интерфейс CollectorHandlerInterface
 
 
 #Как использовать serializer

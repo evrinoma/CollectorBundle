@@ -25,6 +25,8 @@ interface CollectorManagerInterface extends RestInterface
     public function setSerializeGroup($serializeGroup): void;
 
     public function run():CollectionInterface;
+
+    public function get(string $key):CollectionInterface;
 //endregion Getters/Setters
 
 }

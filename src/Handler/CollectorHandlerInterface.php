@@ -20,7 +20,7 @@ interface CollectorHandlerInterface
     /**
      * @return mixed
      */
-    public function handle();
+    public function handle():void;
 
     /**
      * @return string

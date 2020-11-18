@@ -61,6 +61,16 @@ final class CollectorManager implements CollectorManagerInterface
 
         return $this->collection;
     }
+
+
+    public function get(string $key):CollectionInterface
+    {
+        if (array_key_exists($key,$this->handlers)) {
+            $this->handlers[$key]->setCollection($this->collection)->iterate();
+        }
+
+        return $this->collection;
+    }
 //endregion Public
 
 //region SECTION: Getters/Setters
