@@ -49,7 +49,7 @@ final class CollectorApiController extends AbstractApiController
      */
     public function collectEntityTypesAction()
     {
-        return $this->setSerializeGroup($this->collectorManager->getSerializeGroup())->json($this->collectorManager->setRestSuccessOk()->run(), $this->collectorManager->getRestStatus());
+        return $this->setSerializeGroup($this->collectorManager->getSerializeGroup())->json($this->collectorManager->setRestOk()->run(), $this->collectorManager->getRestStatus());
     }
 //endregion Public
 
@@ -63,7 +63,7 @@ final class CollectorApiController extends AbstractApiController
      */
     public function getEntityTypesAction()
     {
-        return $this->setSerializeGroup($this->collectorManager->getSerializeGroup())->json($this->collectorManager->setRestSuccessOk()->get(ContrAgent::class), $this->collectorManager->getRestStatus());
+        return $this->setSerializeGroup($this->collectorManager->getSerializeGroup())->json($this->collectorManager->setRestOk()->get(ContrAgent::class), $this->collectorManager->getRestStatus());
     }
 //endregion Getters/Setters
 }
