@@ -21,17 +21,17 @@ final class CollectorManager implements CollectorManagerInterface
      */
     private array $handlers = [];
     /**
-     * @var CollectorHandlerInterface
+     * @var ?CollectorHandlerInterface
      */
-    private CollectorHandlerInterface $handler;
+    private ?CollectorHandlerInterface $handler = null;
     /**
-     * @var CollectorHandlerInterface
+     * @var ?CollectorHandlerInterface
      */
-    private CollectorHandlerInterface $chain;
+    private ?CollectorHandlerInterface $chain = null;
     /**
-     * @var CollectionInterface
+     * @var ?CollectionInterface
      */
-    private CollectionInterface $collection;
+    private ?CollectionInterface $collection = null;
     /**
      * @var string
      */
