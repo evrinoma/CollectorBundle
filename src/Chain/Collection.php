@@ -4,6 +4,8 @@
 namespace Evrinoma\CollectorBundle\Chain;
 
 
+use JMS\Serializer\Annotation\Groups;
+
 /**
  * Class Collection
  *
