@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Reference;
 class EvrinomaCollectorExtension extends Extension
 {
 //region SECTION: Fields
-    private $container;
+    private ContainerBuilder $container;
 //endregion Fields
 
 //region SECTION: Public

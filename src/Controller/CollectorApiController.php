@@ -81,7 +81,7 @@ final class CollectorApiController extends AbstractApiController
 //region SECTION: Getters/Setters
 
     /**
-     * @Rest\Get("/api/collector/get", name="api_collector_get, options={"expose"=true})
+     * @Rest\Get("/api/collector/get", name="api_collector_get", options={"expose"=true})
      * @OA\Get(tags={"collector"})
      * @OA\Response(response=200,description="Get collected data by key")
      *
