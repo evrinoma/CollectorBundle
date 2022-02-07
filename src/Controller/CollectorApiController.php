@@ -4,8 +4,11 @@ namespace Evrinoma\CollectorBundle\Controller;
 
 
 use App\Collector\ContrAgent;
+use Evrinoma\CollectorBundle\Exception\CollectorInvalidException;
+use Evrinoma\CollectorBundle\Exception\CollectorNotFoundException;
 use Evrinoma\CollectorBundle\Manager\CollectorManagerInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractApiController;
+use Evrinoma\UtilsBundle\Rest\RestInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;
 use OpenApi\Annotations as OA;
@@ -22,7 +25,7 @@ final class CollectorApiController extends AbstractApiController
     /**
      * @var CollectorManagerInterface
      */
-    private $collectorManager;
+    private CollectorManagerInterface $collectorManager;
 //endregion Fields
 
 //region SECTION: Constructor
@@ -41,29 +44,58 @@ final class CollectorApiController extends AbstractApiController
 
 //region SECTION: Public
     /**
-     * @Rest\Get("/api/collector/run", name="api_collector_entity", options={"expose"=true})
+     * @Rest\Get("/api/collector/run", name="api_collector_run", options={"expose"=true})
      * @OA\Get(tags={"collector"})
-     * @OA\Response(response=200,description="Get collected entity")
+     * @OA\Response(response=200,description="Run collector")
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function collectEntityTypesAction()
+    public function runAction()
     {
-        return $this->setSerializeGroup($this->collectorManager->getSerializeGroup())->json($this->collectorManager->setRestOk()->run(), $this->collectorManager->getRestStatus());
-    }
-//endregion Public
 
+        try {
+            $json = $this->collectorManager->setRestOk()->run();
+        } catch (\Exception $e) {
+            $json = $this->setRestStatus($this->collectorManager, $e);
+        }
+
+        return $this->setSerializeGroup($this->collectorManager->getSerializeGroup())->json(['message' => 'Get collector', 'data' => $json], $this->collectorManager->getRestStatus());
+    }
+
+//endregion Public
+    public function setRestStatus(RestInterface $manager, \Exception $e): array
+    {
+        switch (true) {
+            case $e instanceof CollectorNotFoundException:
+                $manager->setRestNotFound();
+                break;
+            case $e instanceof CollectorInvalidException:
+                $manager->setRestUnprocessableEntity();
+                break;
+            default:
+                $manager->setRestBadRequest();
+        }
+
+        return ['errors' => $e->getMessage()];
+    }
 //region SECTION: Getters/Setters
+
     /**
-     * @Rest\Get("/api/collector/get", name="api_collector_get_entity", options={"expose"=true})
+     * @Rest\Get("/api/collector/get", name="api_collector_get, options={"expose"=true})
      * @OA\Get(tags={"collector"})
-     * @OA\Response(response=200,description="Get collected entity by key")
+     * @OA\Response(response=200,description="Get collected data by key")
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function getEntityTypesAction()
+    public function ggetAction()
     {
-        return $this->setSerializeGroup($this->collectorManager->getSerializeGroup())->json($this->collectorManager->setRestOk()->get(ContrAgent::class), $this->collectorManager->getRestStatus());
+        try {
+            $json = $this->collectorManager->setRestOk()->get(ContrAgent::class);
+        } catch (\Exception $e) {
+            $json = $this->setRestStatus($this->collectorManager, $e);
+        }
+
+        return $this->setSerializeGroup($this->collectorManager->getSerializeGroup())->json(['message' => 'Get collector', 'data' => $json], $this->collectorManager->getRestStatus());
     }
 //endregion Getters/Setters
 }

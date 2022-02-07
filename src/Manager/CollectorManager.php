@@ -19,23 +19,23 @@ final class CollectorManager implements CollectorManagerInterface
     /**
      * @var CollectorHandlerInterface []
      */
-    private $handlers = [];
+    private array $handlers = [];
     /**
      * @var CollectorHandlerInterface
      */
-    private $handler;
+    private CollectorHandlerInterface $handler;
     /**
      * @var CollectorHandlerInterface
      */
-    private $chain;
+    private CollectorHandlerInterface $chain;
     /**
      * @var CollectionInterface
      */
-    private $collection;
+    private CollectionInterface $collection;
     /**
      * @var string
      */
-    private $serializeGroup;
+    private string $serializeGroup;
 //region SECTION: Public
     public function setChain(CollectorHandlerInterface $handler):void
     {
